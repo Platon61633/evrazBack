@@ -13,7 +13,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 $NS = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
 
 switch ($_GET['need']) {
-    case 'NS':
+    case 'ns':
         echo 'ggg';
         break;
     
