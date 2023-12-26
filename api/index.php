@@ -10,8 +10,8 @@ $method = $_SERVER['REQUEST_METHOD'];
 //         echo 'badg';
 //     }
 
-$NS = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'))
-echo $NS
+$NS = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
+echo $NS;
 
 ?>
 
