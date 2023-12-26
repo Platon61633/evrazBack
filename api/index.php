@@ -1,13 +1,14 @@
 <?php
-require_once __DIR__.'/configuration/connect.php';
+echo 'e';
+// require_once __DIR__.'/configuration/connect.php';
 
-$method = $_SERVER['REQUEST_METHOD'];
+// $method = $_SERVER['REQUEST_METHOD'];
 
-if ($connect) {
-        echo 'gg';
-    }else {
-        echo 'badg';
-    }
+// if ($connect) {
+//         echo 'gg';
+//     }else {
+//         echo 'badg';
+//     }
 
 // $NS = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'))
 
