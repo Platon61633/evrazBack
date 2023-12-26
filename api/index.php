@@ -14,11 +14,11 @@ $NS = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
 
 switch ($_GET['need']) {
     case 'NS':
-        echo 'ggg'
+        echo 'ggg';
         break;
     
     default:
-        # code...
+       echo 'no';
         break;
 }
 
