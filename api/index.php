@@ -11,7 +11,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 //     }
 
 $NS = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
-print_r($NS);
+echo $NS[0][2];
 
 ?>
 
