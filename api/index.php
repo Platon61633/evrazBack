@@ -11,7 +11,16 @@ $method = $_SERVER['REQUEST_METHOD'];
 //     }
 
 $NS = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
-echo $NS[0][2];
+
+switch ($_GET['need']) {
+    case 'NS':
+        echo 'ggg'
+        break;
+    
+    default:
+        # code...
+        break;
+}
 
 ?>
 
