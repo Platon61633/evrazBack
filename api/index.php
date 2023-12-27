@@ -15,10 +15,14 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($_GET['need']) {
     case 'ns':
         $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
-        $trainsOnFirstWay = explode(' ',$ns[0][1]);
-        for ($i=0; $i < count($trainsOnFirstWay); $i++) { 
-            echo $trainsOnFirstWay[$i].', ';
+        // $trainsOnFirstWay = explode(' ',$ns[$i][1]);
+        for ($i=0; $i < count($ns); $i++) { 
+            for ($j=0; $j < count($explode(' ',$ns[$i][1])); $j++) { 
+                echo $explode(' ',$ns[$i][1][$j]).', ';
+            }
+            echo '-----------------';
         }
+        
         // explode(' ',$ns[0][1])
         // print_r();
         break;
