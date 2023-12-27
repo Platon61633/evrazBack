@@ -18,7 +18,7 @@ switch ($_GET['need']) {
         // $trainsOnFirstWay = explode(' ',$ns[$i][1]);
         for ($i=0; $i < count($ns); $i++) { 
             for ($j=0; $j < count(explode(' ',$ns[$i][1])); $j++) { 
-                echo explode(' ',$ns[$i][1][$j]).', ';
+                echo explode(' ',$ns[$i][1])[$j].', ';
             }
             echo '-----------------';
         }
