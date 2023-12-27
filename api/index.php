@@ -17,8 +17,8 @@ switch ($_GET['need']) {
         $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
         // $trainsOnFirstWay = explode(' ',$ns[$i][1]);
         for ($i=0; $i < count($ns); $i++) { 
-            for ($j=0; $j < count($explode(' ',$ns[$i][1])); $j++) { 
-                echo $explode(' ',$ns[$i][1][$j]).', ';
+            for ($j=0; $j < count(explode(' ',$ns[$i][1])); $j++) { 
+                echo explode(' ',$ns[$i][1][$j]).', ';
             }
             echo '-----------------';
         }
