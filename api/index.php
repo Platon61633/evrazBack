@@ -15,7 +15,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($_GET['need']) {
     case 'ns':
         $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
-        print_r($ns[0]);
+        print_r($ns[0][1]);
         break;
     
     default:
