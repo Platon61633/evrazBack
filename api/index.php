@@ -21,7 +21,7 @@ switch ($_GET['need']) {
                 // echo explode(' ',$ns[$i][1])[$j].', ';
                 $trains[$i][$j] = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]));
             }
-            // echo '-----------------';
+            // echo '------------------';
         }
         
         print_r($trains);
