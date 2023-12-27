@@ -10,11 +10,12 @@ $method = $_SERVER['REQUEST_METHOD'];
 //         echo 'badg';
 //     }
 
-$NS = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
+
 
 switch ($_GET['need']) {
     case 'ns':
-        echo 'ggg';
+        $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
+        print_r($ns)
         break;
     
     default:
