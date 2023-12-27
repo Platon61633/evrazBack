@@ -23,7 +23,7 @@ switch ($_GET['need']) {
             }
             // echo '-----------------';
         }
-        print_r($trains);
+        print_r($trains[0]);
         
         // explode(' ',$ns[0][1])
         // print_r();
