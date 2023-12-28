@@ -19,7 +19,7 @@ switch ($_GET['need']) {
         for ($i=0; $i < count($ns); $i++) { 
             for ($j=0; $j < count(explode(' ',$ns[$i][1])); $j++) { 
                 // echo explode(' ',$ns[$i][1])[$j].', ';
-                $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
+                $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]));
             }
             // echo '-----------------';
         }
