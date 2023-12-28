@@ -19,22 +19,22 @@ switch ($_GET['need']) {
         for ($i=0; $i < count($ns); $i++) { 
             for ($j=0; $j < count(explode(' ',$ns[$i][1])); $j++) { 
                 // echo explode(' ',$ns[$i][1])[$j].', ';
-                // $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]));
-                echo $ns[$i][1];
-                echo '<pre>';
-                print_r(mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0]);
-                echo '</pre>';
+                $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
+                // echo $ns[$i][1];
+                // echo '<pre>';
+                // print_r(mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0]);
+                // echo '</pre>';
             }
             // echo '-----------------';
         }
 
-        echo '<h1>--------------</h1>';
+        // echo '<h1>--------------</h1>';
         echo '<pre>';
         print_r($trains);
         echo '</pre>';
         echo '<h1>--------------</h1>';
         echo '<pre>';
-        print_r($trains[0][0]);
+        print_r($trains[0]);
         echo '</pre>';
         echo json_encode($trains);
         break;
