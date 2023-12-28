@@ -1,4 +1,3 @@
-<!-- <pre> -->
 <?php
 // echo 'e';
 require_once __DIR__.'/configuration/connect.php';
@@ -220,4 +219,3 @@ switch ($_GET['need']) {
 //             break;
 // }
 ?>
-<!-- </pre> -->
