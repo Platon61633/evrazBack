@@ -23,6 +23,9 @@ switch ($_GET['need']) {
             }
             // echo '-----------------';
         }
+        echo '<pre>';
+        print_r($trains);
+        echo '</pre>';
         echo json_encode($trains);
         break;
     
