@@ -16,15 +16,18 @@ switch ($_GET['need']) {
     case 'ns':
         $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
         // $trainsOnFirstWay = explode(' ',$ns[$i][1]);
-        for ($i=0; $i < count($ns); $i++) { 
-            for ($j=0; $j < count(explode(' ',$ns[$i][1])); $j++) { 
+        for ($i=0; $i < count($ns); $i++) {
+            $trainsOnWay = explode(' ',$ns[$i][1]);
+            
                 // echo explode(' ',$ns[$i][1])[$j].', ';
-                // $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
-                echo $ns[$i][1];
-                echo '<pre>';
-                print_r(mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0]);
-                echo '</pre>';
-            }
+                if ($trainsOnWay[0]==0) {
+                    $trains[$i] = 0;
+
+                }else {
+                    for ($j=0; $j < count($trainsOnWay); $j++) { 
+                        $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
+                    }
+                }
             // echo '-----------------';
         }
 
