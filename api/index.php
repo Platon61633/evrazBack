@@ -32,13 +32,13 @@ switch ($_GET['need']) {
         }
 
         // echo '<h1>--------------</h1>';
-        echo '<pre>';
-        print_r($trains);
-        echo '</pre>';
-        echo '<h1>--------------</h1>';
-        echo '<pre>';
-        print_r($trains[0]);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($trains);
+        // echo '</pre>';
+        // echo '<h1>--------------</h1>';
+        // echo '<pre>';
+        // print_r($trains[0]);
+        // echo '</pre>';
         echo json_encode($trains);
         break;
     
