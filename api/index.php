@@ -26,7 +26,7 @@ switch ($_GET['need']) {
         echo '<pre>';
         print_r($trains);
         echo '</pre>';
-        echo '--------------';
+        echo '<h1>--------------</h1>';
         echo '<pre>';
         print_r($trains[0]);
         echo '</pre>';
