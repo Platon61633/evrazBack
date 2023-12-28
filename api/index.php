@@ -22,7 +22,7 @@ switch ($_GET['need']) {
                 // $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]));
                 echo $ns[$i][1];
                 echo '<pre>';
-                print_r(mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j])));
+                print_r(mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0]);
                 echo '</pre>';
             }
             // echo '-----------------';
