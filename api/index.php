@@ -23,7 +23,7 @@ switch ($_GET['need']) {
             }
             // echo '-----------------';
         }
-        echo json_encode($trains)
+        echo json_encode($trains);
         break;
     
     default:
