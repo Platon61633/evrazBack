@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-
-
-
-
-
-<pre>
+<!-- <pre> -->
 <?php
 // echo 'e';
 require_once __DIR__.'/configuration/connect.php';
@@ -234,6 +220,4 @@ switch ($_GET['need']) {
 //             break;
 // }
 ?>
-</pre>
-</body>
-</html>
+<!-- </pre> -->
