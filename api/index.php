@@ -1,22 +1,15 @@
 <?php
 // echo 'e';
 require_once __DIR__.'/configuration/connect.php';
-
 $method = $_SERVER['REQUEST_METHOD'];
-
 // if ($connect) {
 //         echo 'gg';
 //     }else {
 //         echo 'badg';
 //     }
-
-echo count([46456,54,645,6,54,645,6]);
-
 switch ($_GET['need']) {
     case 'ns':
-        switch ($method) {
-            case 'GET':
-                $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
+        $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
         // $trainsOnFirstWay = explode(' ',$ns[$i][1]);
         for ($i=0; $i < count($ns); $i++) {
             $trainsOnWay = explode(' ',$ns[$i][1]);
@@ -24,29 +17,11 @@ switch ($_GET['need']) {
                 // echo explode(' ',$ns[$i][1])[$j].', ';
                 if ($trainsOnWay[0]==0) {
                     $trains[$i] = 0;
-
                 }else {
                     for ($j=0; $j < count($trainsOnWay); $j++) { 
                         $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
                     }
                 }
-            break;
-
-            case 'POST':
-                $arr = json_decode(file_get_contents('php://input'));
-                // for ($i=0; $i < count($arr); $i++) { 
-                //     # code...
-                // }
-                // if (!mysqli_query($connect, "UPDATE `NS` SET `name` = '$fix[1]', `date` = '$fix[2]', `desc` = '$fix[3]', `time` = '$fix[4]', `number` = '$fix[5]' WHERE `useful`.`id` = ".$fix[0])) {
-                //     echo 1;
-                // }
-
-                break;
-            
-            default:
-                # code...
-                break;
-        }
             // echo '-----------------';
         }
 
@@ -60,29 +35,32 @@ switch ($_GET['need']) {
         // echo '</pre>';
         echo json_encode($trains);
         break;
+
+
     
+          
+            
+    
+
+          
+          Expand Down
+    
+    
+  
     default:
        echo 'no';
         break;
 }
-
-
-
 // require_once __DIR__.'/configuration/connect.php';
-
-
 // $method = $_SERVER['REQUEST_METHOD'];
-
 // // if ($connect) {
 // //     echo 'gg';
 // // }else {
 // //     echo 'badg';
 // // }
-
 // switch ($_GET['for']) {
 //     case 'event':
 //         $event = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `event`'));
-
 //         switch ($method) {
 //             case 'GET':
 //                     echo json_encode($event);
@@ -102,9 +80,7 @@ switch ($_GET['need']) {
 //         break;
     
 //     case 'useful':
-
 //         $useful =  mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `useful`'));
-
 //         switch ($method) {
 //             case 'GET':
 //                 echo json_encode($useful);
@@ -171,7 +147,6 @@ switch ($_GET['need']) {
 //                 break;
 //         }
         
-
 //         switch ($method) {
 //             case 'GET':
 //                 echo json_encode($kitchen);
@@ -198,7 +173,6 @@ switch ($_GET['need']) {
 //         }
 //         break;
 //         case 'special':
-
 //             $special = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `special`'));
     
 //             switch ($method) {
@@ -227,9 +201,7 @@ switch ($_GET['need']) {
 //             }
 //             break;
 //         case 'reserved':
-
 //             $reserved = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `reserved`'));
-
 //             switch ($method) {
 //                 case 'GET':
 //                     echo json_encode($reserved);
