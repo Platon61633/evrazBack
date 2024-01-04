@@ -34,12 +34,12 @@ switch ($_GET['need']) {
 
             case 'POST':
                 $arr = json_decode(file_get_contents('php://input'));
-                for ($i=0; $i < count($arr); $i++) { 
-                    # code...
-                }
-                if (!mysqli_query($connect, "UPDATE `NS` SET `name` = '$fix[1]', `date` = '$fix[2]', `desc` = '$fix[3]', `time` = '$fix[4]', `number` = '$fix[5]' WHERE `useful`.`id` = ".$fix[0])) {
-                    echo 1;
-                }
+                // for ($i=0; $i < count($arr); $i++) { 
+                //     # code...
+                // }
+                // if (!mysqli_query($connect, "UPDATE `NS` SET `name` = '$fix[1]', `date` = '$fix[2]', `desc` = '$fix[3]', `time` = '$fix[4]', `number` = '$fix[5]' WHERE `useful`.`id` = ".$fix[0])) {
+                //     echo 1;
+                // }
 
                 break;
             
