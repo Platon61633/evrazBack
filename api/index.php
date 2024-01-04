@@ -33,7 +33,7 @@ switch ($_GET['need']) {
                     mysqli_query($connect, "UPDATE `NS` SET `trains` = '$trains' WHERE `NS`.`way` = ".$fix[$i][0]);
 
                 }
-
+ 
                 echo 'gogo';
                     
                 break;
