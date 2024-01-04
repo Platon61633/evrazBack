@@ -10,11 +10,13 @@ $method = $_SERVER['REQUEST_METHOD'];
 //         echo 'badg';
 //     }
 
-
+echo count([46456,54,645,6,54,645,6]);
 
 switch ($_GET['need']) {
     case 'ns':
-        $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
+        switch ($method) {
+            case 'GET':
+                $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
         // $trainsOnFirstWay = explode(' ',$ns[$i][1]);
         for ($i=0; $i < count($ns); $i++) {
             $trainsOnWay = explode(' ',$ns[$i][1]);
@@ -28,6 +30,23 @@ switch ($_GET['need']) {
                         $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
                     }
                 }
+            break;
+
+            case 'POST':
+                $arr = json_decode(file_get_contents('php://input'));
+                for ($i=0; $i < count($arr); $i++) { 
+                    # code...
+                }
+                if (!mysqli_query($connect, "UPDATE `NS` SET `name` = '$fix[1]', `date` = '$fix[2]', `desc` = '$fix[3]', `time` = '$fix[4]', `number` = '$fix[5]' WHERE `useful`.`id` = ".$fix[0])) {
+                    echo 1;
+                }
+
+                break;
+            
+            default:
+                # code...
+                break;
+        }
             // echo '-----------------';
         }
 
