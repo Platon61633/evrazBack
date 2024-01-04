@@ -9,7 +9,9 @@ $method = $_SERVER['REQUEST_METHOD'];
 //     }
 switch ($_GET['need']) {
     case 'ns':
-        $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
+        switch ($method) {
+            case 'GET':
+                $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
         // $trainsOnFirstWay = explode(' ',$ns[$i][1]);
         for ($i=0; $i < count($ns); $i++) {
             $trainsOnWay = explode(' ',$ns[$i][1]);
@@ -35,6 +37,11 @@ switch ($_GET['need']) {
         // echo '</pre>';
         echo json_encode($trains);
         break;
+            
+            default:
+                # code...
+                break;
+        }
 
 
     
