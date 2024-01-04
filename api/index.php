@@ -12,32 +12,33 @@ switch ($_GET['need']) {
         switch ($method) {
             case 'GET':
                 $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
-        // $trainsOnFirstWay = explode(' ',$ns[$i][1]);
-        for ($i=0; $i < count($ns); $i++) {
-            $trainsOnWay = explode(' ',$ns[$i][1]);
-            
-                // echo explode(' ',$ns[$i][1])[$j].', ';
-                if ($trainsOnWay[0]==0) {
-                    $trains[$i] = 0;
-                }else {
-                    for ($j=0; $j < count($trainsOnWay); $j++) { 
-                        $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
-                    }
-                }
-            // echo '-----------------';
-        }
+                for ($i=0; $i < count($ns); $i++) {
+                    $trainsOnWay = explode(' ',$ns[$i][1]);
 
-        // echo '<h1>--------------</h1>';
-        // echo '<pre>';
-        // print_r($trains);
-        // echo '</pre>';
-        // echo '<h1>--------------</h1>';
-        // echo '<pre>';
-        // print_r($trains[0]);
-        // echo '</pre>';
-        echo json_encode($trains);
-        break;
-            
+                        if ($trainsOnWay[0]==0) {
+                            $trains[$i] = 0;
+                        }else {
+                            for ($j=0; $j < count($trainsOnWay); $j++) { 
+                                $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
+                            }
+                        }
+                }
+                echo json_encode($trains);
+                break;
+            case 'POST':
+                $fix = json_decode(file_get_contents('php://input'));
+                
+                for ($i=0; $i < count($fix); $i++) {
+                    $trains = join(' ', $fix[$i][1])
+                    mysqli_query($connect, "UPDATE `NS` SET `trains` = '$trains' WHERE `NS`.`way` = ".$fix[$i][0]);
+
+                }
+
+                echo 'gogo'
+                    
+                break;
+
+
             default:
                 # code...
                 break;
