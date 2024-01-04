@@ -29,12 +29,12 @@ switch ($_GET['need']) {
                 $fix = json_decode(file_get_contents('php://input'));
                 
                 for ($i=0; $i < count($fix); $i++) {
-                    $trains = join(' ', $fix[$i][1])
+                    $trains = join(' ', $fix[$i][1]);
                     mysqli_query($connect, "UPDATE `NS` SET `trains` = '$trains' WHERE `NS`.`way` = ".$fix[$i][0]);
 
                 }
 
-                echo 'gogo'
+                echo 'gogo';
                     
                 break;
 
