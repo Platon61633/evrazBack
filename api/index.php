@@ -37,7 +37,7 @@ switch ($_GET['need']) {
                     // $trains = join(' ', ['44', '24', '34', '54']);
 
                     echo $StrTrains.'   '.$fix[$i][0];
-                    // mysqli_query($connect, "UPDATE `NS` SET `trains` = '$trains' WHERE `NS`.`way` = ".$fix[$i][0]);
+                    mysqli_query($connect, "UPDATE `NS` SET `trains` = '$StrTrains' WHERE `NS`.`way` = ".$fix[$i][0]);
 
                 }
  
