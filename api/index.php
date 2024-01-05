@@ -29,7 +29,9 @@ switch ($_GET['need']) {
                 $fix = json_decode(file_get_contents('php://input'));
                 
                 for ($i=0; $i < count($fix); $i++) {
-                    $trains = join(' ', $fix[$i][1]);
+                    // $trains = join(' ', $fix[$i][1]);
+                    $trains = join(' ', ['44', '24', '34', '54']);
+
                     echo $trains.'   '.$fix[$i][0];
                     // mysqli_query($connect, "UPDATE `NS` SET `trains` = '$trains' WHERE `NS`.`way` = ".$fix[$i][0]);
 
