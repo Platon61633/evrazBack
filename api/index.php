@@ -45,10 +45,11 @@ switch ($_GET['need']) {
 
                 for ($i=0; $i < count($fix); $i++) { 
                     for ($j=0; $j < count($fix[$i][1]); $j++) { 
-                        mysqli_query($connect, "UPDATE `trains` SET `position` = '$fix[$i][1][$j][2]' WHERE `NS`.`number` = ".$fix[$i][1][$j][0]);
+                        mysqli_query($connect, "UPDATE `trains` SET `position` = '$fix[$i][1][$j][2]' WHERE `trains`.`number` = ".$fix[$i][1][$j][0]);
                     }
                     
                 }
+                echo 'hhh';
                     
                 break;
 
