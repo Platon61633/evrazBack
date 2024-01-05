@@ -29,9 +29,9 @@ switch ($_GET['need']) {
                 $fix = json_decode(file_get_contents('php://input'));
                 
                 for ($i=0; $i < count($fix); $i++) {
-                    $StrTrains = $fix[$i][1][0][0]
+                    $StrTrains = $fix[$i][1][0][0];
                     for ($j=1; $j < count($fix[$i][1]); $j++) { 
-                        $StrTrains = $StrTrains.' '.$fix[$i][1][$j][0]
+                        $StrTrains = $StrTrains.' '.$fix[$i][1][$j][0];
                     }
                     // $trains = join(' ', $fix[$i][1]);
                     // $trains = join(' ', ['44', '24', '34', '54']);
