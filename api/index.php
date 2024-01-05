@@ -30,7 +30,7 @@ switch ($_GET['need']) {
                 
                 for ($i=0; $i < count($fix); $i++) {
                     $trains = join(' ', $fix[$i][1]);
-                    echo $trains;
+                    echo $trains.'   '.$fix[$i][0];
                     // mysqli_query($connect, "UPDATE `NS` SET `trains` = '$trains' WHERE `NS`.`way` = ".$fix[$i][0]);
 
                 }
