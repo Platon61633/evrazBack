@@ -18,6 +18,7 @@ switch ($_GET['need']) {
                         if ($trainsOnWay[0]==0) {
                             $trains[$i] = 0;
                         }else {
+                            print_r($trainsOnWay);
                             for ($j=0; $j < count($trainsOnWay); $j++) { 
                                 echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
                                 echo $ns[$i][1].'<br/>';
