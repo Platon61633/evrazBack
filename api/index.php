@@ -19,6 +19,7 @@ switch ($_GET['need']) {
                             $trains[$i] = 0;
                         }else {
                             for ($j=0; $j < count($trainsOnWay); $j++) { 
+                                echo mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
                                 $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
                             }
                         }
