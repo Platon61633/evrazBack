@@ -32,16 +32,23 @@ switch ($_GET['need']) {
                 $fix = json_decode(file_get_contents('php://input'));
                 
                 for ($i=0; $i < count($fix); $i++) {
-                    $StrTrains = $fix[$i][1][0][0];
-                    for ($j=1; $j < count($fix[$i][1]); $j++) { 
-                        $StrTrains = $StrTrains.' '.$fix[$i][1][$j][0];
+                    if ($fix[$i][1])$StrTrains = $fix[$i][1][0][0];
+                    else $StrTrains = 0;
+
+                    if ($fix[$i][1]) {
+                        for ($j=1; $j < count($fix[$i][1]); $j++) {
+                            $StrTrains = $StrTrains.' '.$fix[$i][1][$j][0];
+                        }
+                        // $trains = join(' ', $fix[$i][1]);
+                        // $trains = join(' ', ['44', '24', '34', '54']);
+    
+                        echo $StrTrains.'   '.$fix[$i][0];
+                        mysqli_query($connect, "UPDATE `NS` SET `trains` = '$StrTrains' WHERE `NS`.`way` = ".$fix[$i][0]);
+    
+                    }else {
+                        mysqli_query($connect, "UPDATE `NS` SET `trains` = 0 WHERE `NS`.`way` = ".$fix[$i][0]);
                     }
-                    // $trains = join(' ', $fix[$i][1]);
-                    // $trains = join(' ', ['44', '24', '34', '54']);
-
-                    echo $StrTrains.'   '.$fix[$i][0];
-                    mysqli_query($connect, "UPDATE `NS` SET `trains` = '$StrTrains' WHERE `NS`.`way` = ".$fix[$i][0]);
-
+                    
                 }
  
                 echo 'gogo';
