@@ -27,7 +27,7 @@ switch ($_GET['need']) {
                             }
                         }
                 }
-                $ans = ['trains': $trains, 'loco': 5];
+                $ans = ['trains' => $trains, 'loco' => 5];
                 echo json_encode($ans);
                 break;
             case 'POST':
