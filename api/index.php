@@ -14,6 +14,8 @@ switch ($_GET['need']) {
                 $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
                 for ($i=0; $i < count($ns); $i++) {
                     $trainsOnWay = explode(' ',$ns[$i][1]);
+                    $CHlocoOnWay = explode(' ',$ns[$i][2]);
+                    $NotCHlocoOnWay = explode(' ',$ns[$i][3]);
 
                         if ($trainsOnWay[0]==0) {
                             $trains[$i] = 0;
@@ -26,8 +28,32 @@ switch ($_GET['need']) {
                                 
                             }
                         }
+
+                        if ($NotCHlocoOnWay[0]==0) {
+                            $NotCHloco[$i] = 0;
+                        }else {
+                            // print_r($trainsOnWay);
+                            for ($j=0; $j < count($NotCHlocoOnWay); $j++) { 
+                                // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
+                                // echo $ns[$i][1].'<br/>';
+                                $NotCHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][3])[$j]))[0];
+                                
+                            }
+                        }
+
+                        if ($CHlocoOnWay[0]==0) {
+                            $CHloco[$i] = 0;
+                        }else {
+                            // print_r($trainsOnWay);
+                            for ($j=0; $j < count($CHlocoOnWay); $j++) { 
+                                // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
+                                // echo $ns[$i][1].'<br/>';
+                                $CHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][2])[$j]))[0];
+                                
+                            }
+                        }
                 }
-                $ans = ['trains' => $trains, 'loco' => 5];
+                $ans = ['trains' => $trains, 'CH' => $CHloco, 'NotCH' => $NotCHloco];
                 echo json_encode($ans);
                 break;
             case 'POST':
