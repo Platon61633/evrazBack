@@ -23,10 +23,11 @@ switch ($_GET['need']) {
                                 // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
                                 // echo $ns[$i][1].'<br/>';
                                 $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
-                                $ans = ['trains': $trains, 'loco': 5]
+                                
                             }
                         }
                 }
+                $ans = ['trains': $trains, 'loco': 5];
                 echo json_encode($ans);
                 break;
             case 'POST':
