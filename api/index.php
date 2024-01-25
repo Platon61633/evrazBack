@@ -36,7 +36,7 @@ switch ($_GET['need']) {
                             for ($j=0; $j < count($NotCHlocoOnWay); $j++) { 
                                 // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
                                 // echo $ns[$i][1].'<br/>';
-                                $NotCHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][3])[$j]))[0];
+                                $NotCHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `locomotives` WHERE `number` = ". explode(' ',$ns[$i][3])[$j]))[0];
                                 
                             }
                         }
@@ -48,7 +48,7 @@ switch ($_GET['need']) {
                             for ($j=0; $j < count($CHlocoOnWay); $j++) { 
                                 // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
                                 // echo $ns[$i][1].'<br/>';
-                                $CHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][2])[$j]))[0];
+                                $CHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `locomotives` WHERE `number` = ". explode(' ',$ns[$i][2])[$j]))[0];
                                 
                             }
                         }
