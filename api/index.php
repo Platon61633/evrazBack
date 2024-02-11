@@ -96,6 +96,9 @@ switch ($_GET['need']) {
                 # code...
                 break;
         }
+        case 'operation':
+            echo 'oper';
+            break;
 
 
     
