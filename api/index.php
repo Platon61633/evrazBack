@@ -97,7 +97,7 @@ switch ($_GET['need']) {
                 break;
         }
         case 'operation':
-            $operation = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
+            $operation = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `operation`'));
             echo json_encode($operation);
             break;
 
