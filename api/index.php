@@ -78,8 +78,8 @@ switch ($_GET['need']) {
                     }
                     
                 }
-                echo json_encode($fix);
-                echo 'gogo';
+                // echo json_encode($fix);
+                // echo 'gogo';
 
                 for ($i=0; $i < count($fix); $i++) { 
                     for ($j=0; $j < count($fix[$i][1]); $j++) { 
@@ -110,6 +110,19 @@ switch ($_GET['need']) {
         }
         
         break;
+    case 'train':
+        switch ($method) {
+            case 'GET':
+                $number = $_GET['train']
+                $ans = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `trains` WHERE number = '.$number.';'))
+                echo json_encode($ans)
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        break
 
 
     
