@@ -114,7 +114,7 @@ switch ($_GET['need']) {
         switch ($method) {
             case 'GET':
                 $number = $_GET['train'];
-                $ans = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `trains` WHERE number = '.$number.';'));
+                $ans = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `trains` WHERE number = '.$number.';'))[0];
                 echo json_encode([$ans[0], $ans[2]]);
                 break;
             
