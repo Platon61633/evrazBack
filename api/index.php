@@ -87,7 +87,7 @@ switch ($_GET['need']) {
                     }
                     
                 }
-                echo json_decode($fix);
+                echo json_encode($fix);
                     
                 break;
 
