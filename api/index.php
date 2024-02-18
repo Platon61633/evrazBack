@@ -78,7 +78,7 @@ switch ($_GET['need']) {
                     }
                     
                 }
- 
+                echo json_encode($fix);
                 echo 'gogo';
 
                 for ($i=0; $i < count($fix); $i++) { 
@@ -87,7 +87,7 @@ switch ($_GET['need']) {
                     }
                     
                 }
-                echo json_encode($fix);
+                
                     
                 break;
 
