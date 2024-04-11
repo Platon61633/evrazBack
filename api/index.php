@@ -57,36 +57,64 @@ switch ($_GET['need']) {
                 echo json_encode($ans);
                 break;
             case 'POST':
-                $fix = json_decode(file_get_contents('php://input'))[0];
+                $fix = json_decode(file_get_contents('php://input'))
+
+
+                $fixTrain = $fix[0];
+                $fixLocoCH = $fix[1][0]
+                $fixLocoNotCH = $fix[1][1]
                 
-                for ($i=0; $i < count($fix); $i++) {
-                    if ($fix[$i][1])$StrTrains = $fix[$i][1][0][0];
+                for ($i=0; $i < count($fixTrain); $i++) {
+                    if ($fixTrain[$i][1])$StrTrains = $fixTrain[$i][1][0][0];
                     else $StrTrains = 0;
 
-                    if ($fix[$i][1]) {
-                        for ($j=1; $j < count($fix[$i][1]); $j++) {
-                            $StrTrains = $StrTrains.' '.$fix[$i][1][$j][0];
+                    if ($fixTrain[$i][1]) {
+                        for ($j=1; $j < count($fixTrain[$i][1]); $j++) {
+                            $StrTrains = $StrTrains.' '.$fixTrain[$i][1][$j][0];
                         }
-                        // $trains = join(' ', $fix[$i][1]);
+                        // $trains = join(' ', $fixTrain[$i][1]);
                         // $trains = join(' ', ['44', '24', '34', '54']);
     
-                        echo $StrTrains.'   '.$fix[$i][0];
-                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = '$StrTrains' WHERE `NS-P`.`way` = ".$fix[$i][0]);
+                        echo $StrTrains.'   '.$fixTrain[$i][0];
+                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixTrain[$i][0]);
     
                     }else {
-                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = 0 WHERE `NS-P`.`way` = ".$fix[$i][0]);
+                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = 0 WHERE `NS-P`.`way` = ".$fixTrain[$i][0]);
                     }
                     
                 }
-                // echo json_encode($fix);
+                // echo json_encode($fixTrain);
                 // echo 'gogo';
 
-                for ($i=0; $i < count($fix); $i++) { 
-                    for ($j=0; $j < count($fix[$i][1]); $j++) { 
-                        mysqli_query($connect, "UPDATE `trains` SET `position` = '".$fix[$i][1][$j][2]."' WHERE `trains`.`number` = ".$fix[$i][1][$j][0]);
+                for ($i=0; $i < count($fixTrain); $i++) { 
+                    for ($j=0; $j < count($fixTrain[$i][1]); $j++) { 
+                        mysqli_query($connect, "UPDATE `trains` SET `position` = '".$fixTrain[$i][1][$j][2]."' WHERE `trains`.`number` = ".$fixTrain[$i][1][$j][0]);
                     }
                     
                 }
+
+
+                for ($i=0; $i < count($fixLocoCH); $i++) {
+                    if ($fixLocoCH[$i][1])$StrTrains = $fixLocoCH[$i][1][0][0];
+                    else $StrTrains = 0;
+
+                    if ($fixLocoCH[$i][1]) {
+                        for ($j=1; $j < count($fixLocoCH[$i][1]); $j++) {
+                            $StrTrains = $StrTrains.' '.$fixLocoCH[$i][1][$j][0];
+                        }
+                        // $trains = join(' ', $fixLocoCH[$i][1]);
+                        // $trains = join(' ', ['44', '24', '34', '54']);
+    
+                        echo $StrTrains.'   '.$fixLocoCH[$i][0];
+                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixLocoCH[$i][0]);
+    
+                    }else {
+                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = 0 WHERE `NS-P`.`way` = ".$fixLocoCH[$i][0]);
+                    }
+                    
+                }
+
+                
                 
                     
                 break;
