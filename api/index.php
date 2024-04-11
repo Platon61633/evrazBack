@@ -11,7 +11,7 @@ switch ($_GET['need']) {
     case 'ns':
         switch ($method) {
             case 'GET':
-                $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS`'));
+                $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS-P`'));
                 for ($i=0; $i < count($ns); $i++) {
                     $trainsOnWay = explode(' ',$ns[$i][1]);
                     $CHlocoOnWay = explode(' ',$ns[$i][2]);
@@ -71,10 +71,10 @@ switch ($_GET['need']) {
                         // $trains = join(' ', ['44', '24', '34', '54']);
     
                         echo $StrTrains.'   '.$fix[$i][0];
-                        mysqli_query($connect, "UPDATE `NS` SET `trains` = '$StrTrains' WHERE `NS`.`way` = ".$fix[$i][0]);
+                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = '$StrTrains' WHERE `NS-P`.`way` = ".$fix[$i][0]);
     
                     }else {
-                        mysqli_query($connect, "UPDATE `NS` SET `trains` = 0 WHERE `NS`.`way` = ".$fix[$i][0]);
+                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = 0 WHERE `NS-P`.`way` = ".$fix[$i][0]);
                     }
                     
                 }
