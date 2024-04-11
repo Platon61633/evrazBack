@@ -57,7 +57,7 @@ switch ($_GET['need']) {
                 echo json_encode($ans);
                 break;
             case 'POST':
-                $fix = json_decode(file_get_contents('php://input'));
+                $fix = json_decode(file_get_contents('php://input'))[0];
                 
                 for ($i=0; $i < count($fix); $i++) {
                     if ($fix[$i][1])$StrTrains = $fix[$i][1][0][0];
