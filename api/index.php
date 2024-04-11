@@ -94,27 +94,27 @@ switch ($_GET['need']) {
                 }
 
 
-                // for ($i=0; $i < count($fixLocoCH); $i++) {
-                //     if ($fixLocoCH[$i][1])$StrTrains = $fixLocoCH[$i][1][0][0];
-                //     else $StrTrains = 0;
+                for ($i=0; $i < count($fixLocoCH); $i++) {
+                    if ($fixLocoCH[$i][1])$StrTrains = $fixLocoCH[$i][1][0][0];
+                    else $StrTrains = 0;
 
-                //     if ($fixLocoCH[$i][1]) {
-                //         for ($j=1; $j < count($fixLocoCH[$i][1]); $j++) {
-                //             $StrTrains = $StrTrains.' '.$fixLocoCH[$i][1][$j][0];
-                //         }
-                //         // $trains = join(' ', $fixLocoCH[$i][1]);
-                //         // $trains = join(' ', ['44', '24', '34', '54']);
+                    if ($fixLocoCH[$i][1]) {
+                        for ($j=1; $j < count($fixLocoCH[$i][1]); $j++) {
+                            $StrTrains = $StrTrains.' '.$fixLocoCH[$i][1][$j][0];
+                        }
+                        // $trains = join(' ', $fixLocoCH[$i][1]);
+                        // $trains = join(' ', ['44', '24', '34', '54']);
     
-                //         echo $StrTrains.'   '.$fixLocoCH[$i][0];
-                //         mysqli_query($connect, "UPDATE `NS-P` SET `trains` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixLocoCH[$i][0]);
+                        echo $StrTrains.'   '.$fixLocoCH[$i][0];
+                        mysqli_query($connect, "UPDATE `NS-P` SET `CH` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixLocoCH[$i][0]);
     
-                //     }else {
-                //         mysqli_query($connect, "UPDATE `NS-P` SET `trains` = 0 WHERE `NS-P`.`way` = ".$fixLocoCH[$i][0]);
-                //     }
+                    }else {
+                        mysqli_query($connect, "UPDATE `NS-P` SET `CH` = 0 WHERE `NS-P`.`way` = ".$fixLocoCH[$i][0]);
+                    }
                     
-                // }
+                }
 
-                echo $fixTrain;
+                
 
                 
                 
