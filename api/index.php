@@ -114,6 +114,26 @@ switch ($_GET['need']) {
                     
                 }
 
+                for ($i=0; $i < count($fixLocoNotCH); $i++) {
+                    if ($fixLocoNotCH[$i][1])$StrTrains = $fixLocoNotCH[$i][1][0][0];
+                    else $StrTrains = 0;
+
+                    if ($fixLocoNotCH[$i][1]) {
+                        for ($j=1; $j < count($fixLocoNotCH[$i][1]); $j++) {
+                            $StrTrains = $StrTrains.' '.$fixLocoNotCH[$i][1][$j][0];
+                        }
+                        // $trains = join(' ', $fixLocoNotCH[$i][1]);
+                        // $trains = join(' ', ['44', '24', '34', '54']);
+    
+                        echo $StrTrains.'   '.$fixLocoNotCH[$i][0];
+                        mysqli_query($connect, "UPDATE `NS-P` SET `NotCH` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixLocoNotCH[$i][0]);
+    
+                    }else {
+                        mysqli_query($connect, "UPDATE `NS-P` SET `NotCH` = 0 WHERE `NS-P`.`way` = ".$fixLocoNotCH[$i][0]);
+                    }
+                    
+                }
+
                 
 
                 
