@@ -114,7 +114,7 @@ switch ($_GET['need']) {
                     
                 // }
 
-                echo $fixTrainS;
+                echo $fixTrain;
 
                 
                 
