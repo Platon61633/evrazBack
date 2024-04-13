@@ -154,9 +154,9 @@ switch ($_GET['need']) {
                 echo json_encode($operation);
                 break;
             case 'POST':
-                $post = json_decode(file_get_contents('php://input'));
-                echo $post;
-                // mysqli_query($connect, 'INSERT INTO `operation` (`id`, `desc`, `num_Loco_CH`, `num_Loco_NotCH`, `vagon`, `from`, `to`, `later_min`, `start`, `finish`) VALUES (NULL, $data['Reason'], $data['number_CH'], $data['number_NotCH'], $data['number'], "NS ".$data['FinishPark']." ".$data['StartWay'], "NS ".$data['FinishPark']." ".$data['FinishWay'], $data['time'], $data['StartTime'], $data['FinishTime'])');
+                $data = json_decode(file_get_contents('php://input'));
+                echo $data;
+                mysqli_query($connect, 'INSERT INTO `operation` (`id`, `desc`, `type`, `num_Loco_CH`, `num_Loco_NotCH`, `vagon`, `from`, `to`, `later_min`, `start`, `finish`) VALUES (NULL, '$data[0]', '$data[13]', '$data[1]', '$data[2]', '$data[3]', '$data[4]'." ".'$data[5]'." ".'$data[6]', '$data[7]'." ".'$data[8]'." ".'$data[9]', '$data[10]', '$data[11]', '$data[12]')');
                 break;
             default:
                 # code...
