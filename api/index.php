@@ -159,7 +159,7 @@ switch ($_GET['need']) {
                 mysqli_query($connect, "INSERT INTO `operation` (`id`, `desc`, `type`, `num_Loco_CH`, `num_Loco_NotCH`, `vagon`, `from`, `to`, `later_min`, `start`, `finish`) VALUES (NULL, '$data[0]', '$data[1]', '$data[2]', '$data[3]', '$data[4]', '$data[5]', '$data[6]', '$data[7]', '$data[8]', '$data[9]')");
                 break;
             case 'DELETE':
-                echo mysqli_query($connect, "DELETE FROM operation WHERE `operation`.`id` = 436687");
+                echo mysqli_query($connect, "DELETE FROM operation WHERE `operation`.`id` = 436685");
                 break;
             default:
                 # code...
