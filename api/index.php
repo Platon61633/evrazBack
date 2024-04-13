@@ -156,7 +156,7 @@ switch ($_GET['need']) {
             case 'POST':
                 $data = json_decode(file_get_contents('php://input'));
                 echo $data;
-                mysqli_query($connect, 'INSERT INTO `operation` (`id`, `desc`, `type`, `num_Loco_CH`, `num_Loco_NotCH`, `vagon`, `from`, `to`, `later_min`, `start`, `finish`) VALUES (NULL, '$data[0]', '$data[13]', '$data[1]', '$data[2]', '$data[3]', '$data[4]'." ".'$data[5]'." ".'$data[6]', '$data[7]'." ".'$data[8]'." ".'$data[9]', '$data[10]', '$data[11]', '$data[12]')');
+                mysqli_query($connect, "INSERT INTO `operation` (`id`, `desc`, `type`, `num_Loco_CH`, `num_Loco_NotCH`, `vagon`, `from`, `to`, `later_min`, `start`, `finish`) VALUES (NULL, '$data[0]', '$data[13]', '$data[1]', '$data[2]', '$data[3]', '$data[4]'.' '.'$data[5]'.' '.'$data[6]', '$data[7]'.' '.'$data[8]'.' '.'$data[9]', '$data[10]', '$data[11]', '$data[12]')");
                 break;
             default:
                 # code...
