@@ -2,11 +2,11 @@
 // echo 'e';
 require_once __DIR__.'/configuration/connect.php';
 $method = $_SERVER['REQUEST_METHOD'];
-// if ($connect) {
-//         echo 'gg';
-//     }else {
-//         echo 'badg';
-//     }
+if ($connect) {
+        echo 'gg';
+    }else {
+        echo 'badg';
+    }
 switch ($_GET['need']) {
     case 'ns':
         switch ($method) {
