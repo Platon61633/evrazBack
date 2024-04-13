@@ -160,7 +160,7 @@ switch ($_GET['need']) {
                 break;
             case 'DELETE':
                 $id = json_decode(file_get_contents('php://input'));
-                mysqli_query($connect, "DELETE FROM operation WHERE `operation`.`id` = '$id'")
+                mysqli_query($connect, "DELETE FROM operation WHERE `operation`.`id` = '$id'");
                 break;
             default:
                 # code...
