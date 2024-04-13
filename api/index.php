@@ -153,7 +153,10 @@ switch ($_GET['need']) {
                 $operation = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `operation`'));
                 echo json_encode($operation);
                 break;
-            
+            case 'POST':
+                $data = json_decode(file_get_contents('php://input'));
+                mysqli_query($connect, 'INSERT INTO `operation` (`id`, `desc`, `num_Loco_CH`, `num_Loco_NotCH`, `vagon`, `from`, `to`, `later_min`, `start`, `finish`) VALUES (NULL, $data['Reason'], $data['number_CH'], $data['number_NotCH'], $data['number'], "NS ".$data['FinishPark']." ".$data['StartWay'], "NS ".$data['FinishPark']." ".$data['FinishWay'], $data['time'], $data['StartTime'], $data['FinishTime'])')
+                break;
             default:
                 # code...
                 break;
