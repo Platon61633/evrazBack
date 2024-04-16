@@ -183,7 +183,7 @@ switch ($_GET['need']) {
     
     case 'authorization':
         $name = json_decode(file_get_contents('php://input'));
-        echo json_encode(mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `name`='$name';"))), $name;
+        echo json_encode(mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `name`='$name';"))), $name, 'l';
         break;
 
 
