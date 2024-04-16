@@ -186,7 +186,7 @@ switch ($_GET['need']) {
         $name = $data[0];
         $password = $data[1];
         $g = json_encode(mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `name`='$name';")));
-        if ($g==$password) {
+        if ($g[0][0]==$password) {
             echo 1;
         }else {
             echo 0;
