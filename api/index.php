@@ -185,12 +185,13 @@ switch ($_GET['need']) {
         $data = json_decode(file_get_contents('php://input'));
         $name = $data[0];
         $password = $data[1];
-        if (json_encode(mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `name`='$name';")))==$password) {
+        $g = json_encode(mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `name`='$name';")))
+        if ($g==$password) {
             echo 1;
         }else {
             echo 0;
         }
-        echo $name, $password;
+        echo $g, $name, $password;
         break;
 
 
