@@ -191,7 +191,6 @@ switch ($_GET['need']) {
         }else {
             echo 0;
         }
-        echo $g[0][0], $name, $password;
         break;
 
 
