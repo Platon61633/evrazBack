@@ -180,6 +180,11 @@ switch ($_GET['need']) {
                 break;
         }
         break;
+    
+    case 'authorization':
+        $name = json_decode(file_get_contents('php://input'));
+        echo mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `name` = '$name';");
+        break;
 
 
     
