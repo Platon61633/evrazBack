@@ -11,6 +11,7 @@ switch ($_GET['need']) {
     case 'ns':
         switch ($method) {
             case 'GET':
+                $password = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `id`='$_GET['id']';"))[0][0];
                 $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS-P`'));
                 for ($i=0; $i < count($ns); $i++) {
                     $trainsOnWay = explode(' ',$ns[$i][1]);
