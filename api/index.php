@@ -189,7 +189,6 @@ switch ($_GET['need']) {
 
         if ($g[0][0]==$password) {
             echo mysqli_fetch_all(mysqli_query($connect, "SELECT `id` FROM `amdins` WHERE `name`='$name';"))[0][0];
-            echo 'kmkm';
         }else {
             echo 0;
         }
