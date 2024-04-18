@@ -8,13 +8,13 @@ $method = $_SERVER['REQUEST_METHOD'];
 //         echo 'badg';
 //     }
 switch ($_GET['need']) {
-    case 'ns':
+    case 'station':
         switch ($method) {
             case 'GET':
                 $id = $_GET['id'];
                 $password = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `id`='$id';"))[0][0];
                 if ($password==$_GET['password']) {
-                    $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `NS-P`'));
+                    $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `'.$_GET['station'].'`'));
                 for ($i=0; $i < count($ns); $i++) {
                     $trainsOnWay = explode(' ',$ns[$i][1]);
                     $CHlocoOnWay = explode(' ',$ns[$i][2]);
@@ -80,10 +80,10 @@ switch ($_GET['need']) {
                         // $trains = join(' ', ['44', '24', '34', '54']);
     
                         echo $StrTrains.'   '.$fixTrain[$i][0];
-                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixTrain[$i][0]);
+                        mysqli_query($connect, "UPDATE `'.$_GET['station'].'` SET `trains` = '$StrTrains' WHERE `'.$_GET['station'].'`.`way` = ".$fixTrain[$i][0]);
     
                     }else {
-                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = 0 WHERE `NS-P`.`way` = ".$fixTrain[$i][0]);
+                        mysqli_query($connect, "UPDATE `'.$_GET['station'].'` SET `trains` = 0 WHERE `'.$_GET['station'].'`.`way` = ".$fixTrain[$i][0]);
                     }
                     
                 }
@@ -110,10 +110,10 @@ switch ($_GET['need']) {
                         // $trains = join(' ', ['44', '24', '34', '54']);
     
                         echo $StrTrains.'   '.$fixLocoCH[$i][0];
-                        mysqli_query($connect, "UPDATE `NS-P` SET `CH` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixLocoCH[$i][0]);
+                        mysqli_query($connect, "UPDATE `'.$_GET['station'].'` SET `CH` = '$StrTrains' WHERE `'.$_GET['station'].'`.`way` = ".$fixLocoCH[$i][0]);
     
                     }else {
-                        mysqli_query($connect, "UPDATE `NS-P` SET `CH` = 0 WHERE `NS-P`.`way` = ".$fixLocoCH[$i][0]);
+                        mysqli_query($connect, "UPDATE `'.$_GET['station'].'` SET `CH` = 0 WHERE `'.$_GET['station'].'`.`way` = ".$fixLocoCH[$i][0]);
                     }
                     
                 }
@@ -130,10 +130,10 @@ switch ($_GET['need']) {
                         // $trains = join(' ', ['44', '24', '34', '54']);
     
                         echo $StrTrains.'   '.$fixLocoNotCH[$i][0];
-                        mysqli_query($connect, "UPDATE `NS-P` SET `NotCH` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixLocoNotCH[$i][0]);
+                        mysqli_query($connect, "UPDATE `'.$_GET['station'].'` SET `NotCH` = '$StrTrains' WHERE `'.$_GET['station'].'`.`way` = ".$fixLocoNotCH[$i][0]);
     
                     }else {
-                        mysqli_query($connect, "UPDATE `NS-P` SET `NotCH` = 0 WHERE `NS-P`.`way` = ".$fixLocoNotCH[$i][0]);
+                        mysqli_query($connect, "UPDATE `'.$_GET['station'].'` SET `NotCH` = 0 WHERE `'.$_GET['station'].'`.`way` = ".$fixLocoNotCH[$i][0]);
                     }
                     
                 }
