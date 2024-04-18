@@ -12,9 +12,10 @@ switch ($_GET['need']) {
         switch ($method) {
             case 'GET':
                 $id = $_GET['id'];
+                $station = $_GET['station']
                 $password = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `id`='$id';"))[0][0];
                 if ($password==$_GET['password']) {
-                    $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `ns`'));
+                    $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `'.$station.'`'));
                 for ($i=0; $i < count($ns); $i++) {
                     $trainsOnWay = explode(' ',$ns[$i][1]);
                     $CHlocoOnWay = explode(' ',$ns[$i][2]);
