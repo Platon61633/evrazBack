@@ -9,10 +9,11 @@ $method = $_SERVER['REQUEST_METHOD'];
 //     }
 switch ($_GET['need']) {
     case 'station':
+        $station = $_GET['station'];
         switch ($method) {
             case 'GET':
                 $id = $_GET['id'];
-                $station = $_GET['station'];
+                
                 $password = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `id`='$id';"))[0][0];
                 if ($password==$_GET['password']) {
                     $ns = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `'.$station.'`'));
@@ -63,7 +64,7 @@ switch ($_GET['need']) {
                 break;
             case 'POST':
                 $fix = json_decode(file_get_contents('php://input'));
-
+                
 
                 $fixTrain = $fix[0];
                 $fixLocoCH = $fix[1][0];
@@ -81,7 +82,7 @@ switch ($_GET['need']) {
                         // $trains = join(' ', ['44', '24', '34', '54']);
     
                         echo $StrTrains.'   '.$fixTrain[$i][0];
-                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixTrain[$i][0]);
+                        mysqli_query($connect, "UPDATE `".$station."` SET `trains` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixTrain[$i][0]);
     
                     }else {
                         mysqli_query($connect, "UPDATE `NS-P` SET `trains` = 0 WHERE `NS-P`.`way` = ".$fixTrain[$i][0]);
