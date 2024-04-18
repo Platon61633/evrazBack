@@ -82,10 +82,10 @@ switch ($_GET['need']) {
                         // $trains = join(' ', ['44', '24', '34', '54']);
     
                         echo $StrTrains.'   '.$fixTrain[$i][0];
-                        mysqli_query($connect, "UPDATE `".$station."` SET `trains` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixTrain[$i][0]);
+                        mysqli_query($connect, "UPDATE `".$station."` SET `trains` = '$StrTrains' WHERE ".$station.".`way` = ".$fixTrain[$i][0]);
     
                     }else {
-                        mysqli_query($connect, "UPDATE `NS-P` SET `trains` = 0 WHERE `NS-P`.`way` = ".$fixTrain[$i][0]);
+                        mysqli_query($connect, "UPDATE ".$station." SET `trains` = 0 WHERE ".$station.".`way` = ".$fixTrain[$i][0]);
                     }
                     
                 }
@@ -112,10 +112,10 @@ switch ($_GET['need']) {
                         // $trains = join(' ', ['44', '24', '34', '54']);
     
                         echo $StrTrains.'   '.$fixLocoCH[$i][0];
-                        mysqli_query($connect, "UPDATE `NS-P` SET `CH` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixLocoCH[$i][0]);
+                        mysqli_query($connect, "UPDATE ".$station." SET `CH` = '$StrTrains' WHERE ".$station.".`way` = ".$fixLocoCH[$i][0]);
     
                     }else {
-                        mysqli_query($connect, "UPDATE `NS-P` SET `CH` = 0 WHERE `NS-P`.`way` = ".$fixLocoCH[$i][0]);
+                        mysqli_query($connect, "UPDATE ".$station." SET `CH` = 0 WHERE ".$station.".`way` = ".$fixLocoCH[$i][0]);
                     }
                     
                 }
@@ -132,10 +132,10 @@ switch ($_GET['need']) {
                         // $trains = join(' ', ['44', '24', '34', '54']);
     
                         echo $StrTrains.'   '.$fixLocoNotCH[$i][0];
-                        mysqli_query($connect, "UPDATE `NS-P` SET `NotCH` = '$StrTrains' WHERE `NS-P`.`way` = ".$fixLocoNotCH[$i][0]);
+                        mysqli_query($connect, "UPDATE ".$station." SET `NotCH` = '$StrTrains' WHERE ".$station.".`way` = ".$fixLocoNotCH[$i][0]);
     
                     }else {
-                        mysqli_query($connect, "UPDATE `NS-P` SET `NotCH` = 0 WHERE `NS-P`.`way` = ".$fixLocoNotCH[$i][0]);
+                        mysqli_query($connect, "UPDATE ".$station." SET `NotCH` = 0 WHERE ".$station.".`way` = ".$fixLocoNotCH[$i][0]);
                     }
                     
                 }
