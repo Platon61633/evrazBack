@@ -10,6 +10,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($_GET['need']) {
     case 'station':
         $station = $_GET['station'];
+        echo $station, 'SELECT * FROM `'.$station.'`';
         switch ($method) {
             case 'GET':
                 $id = $_GET['id'];
