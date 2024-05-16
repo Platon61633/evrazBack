@@ -68,7 +68,7 @@ switch ($_GET['need']) {
                 
                 
                 else {
-                    echo 'error';
+                    echo 0;
                 }
                 
                 break;
@@ -203,11 +203,18 @@ switch ($_GET['need']) {
         $password = $data[1];
         $g = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `name`='$name';"));
 
-        if ($g[0][0]==$password) {
-            echo mysqli_fetch_all(mysqli_query($connect, "SELECT `id` FROM `amdins` WHERE `name`='$name';"))[0][0];
-        }else {
+        if (count($g)) {
+            if ($g[0][0]==$password) {
+                echo mysqli_fetch_all(mysqli_query($connect, "SELECT `id` FROM `amdins` WHERE `name`='$name';"))[0][0];
+            }else {
+                echo 0;
+            }
+        } else {
             echo 0;
         }
+        
+
+        
         break;
 
 
