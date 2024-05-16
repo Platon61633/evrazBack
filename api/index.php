@@ -14,10 +14,7 @@ switch ($_GET['need']) {
             case 'GET':
                 $id = $_GET['id'];
                 
-                $password = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `id`='$id';"));
-                
                 $password = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `id`='$id';"))[0][0];
-                print_r(mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `id`='$id';")));
                 if ($password==$_GET['password']) {
                     $ns = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `".$station."`"));
                 for ($i=0; $i < count($ns); $i++) {
@@ -33,7 +30,7 @@ switch ($_GET['need']) {
                                 // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
                                 // echo $ns[$i][1].'<br/>';
                                 $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
-
+                                
                             }
                         }
 
@@ -45,7 +42,7 @@ switch ($_GET['need']) {
                                 // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
                                 // echo $ns[$i][1].'<br/>';
                                 $NotCHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `locomotives` WHERE `number` = ". explode(' ',$ns[$i][3])[$j]))[0];
-
+                                
                             }
                         }
 
@@ -57,13 +54,13 @@ switch ($_GET['need']) {
                                 // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
                                 // echo $ns[$i][1].'<br/>';
                                 $CHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `locomotives` WHERE `number` = ". explode(' ',$ns[$i][2])[$j]))[0];
-
+                                
                             }
                         }
                 }
                 $ans = ['trains' => $trains, 'CH' => $CHloco, 'NotCH' => $NotCHloco];
                 echo json_encode($ans);
-                
+                }
                 break;
             case 'POST':
                 $fix = json_decode(file_get_contents('php://input'));
