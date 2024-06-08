@@ -3,6 +3,8 @@
 
 echo 'gg';
 
+echo fopen('files/table.csv');
+
 // echo 'e';
 // -require_once __DIR__.'/configuration/connect.php';
 // -$method = $_SERVER['REQUEST_METHOD'];
