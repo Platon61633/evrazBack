@@ -1,217 +1,221 @@
 <?php
+
+
+echo 'gg';
+
 // echo 'e';
-require_once __DIR__.'/configuration/connect.php';
-$method = $_SERVER['REQUEST_METHOD'];
-// if ($connect) {
-//         echo 'gg';
-//     }else {
-//         echo 'badg';
-//     }
-switch ($_GET['need']) {
-    case 'station':
-        $station = $_GET['station'];
-        switch ($method) {
-            case 'GET':
-                $id = $_GET['id'];
-                
-                $password = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `id`='$id';"))[0][0];
-                if ($password==$_GET['password']) {
-                    $ns = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `".$station."`"));
-                for ($i=0; $i < count($ns); $i++) {
-                    $trainsOnWay = explode(' ',$ns[$i][1]);
-                    $CHlocoOnWay = explode(' ',$ns[$i][2]);
-                    $NotCHlocoOnWay = explode(' ',$ns[$i][3]);
-
-                        if ($trainsOnWay[0]==0) {
-                            $trains[$i] = 0;
-                        }else {
-                            // print_r($trainsOnWay);
-                            for ($j=0; $j < count($trainsOnWay); $j++) { 
-                                // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
-                                // echo $ns[$i][1].'<br/>';
-                                $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
-                                
-                            }
-                        }
-
-                        if ($NotCHlocoOnWay[0]==0) {
-                            $NotCHloco[$i] = 0;
-                        }else {
-                            // print_r($trainsOnWay);
-                            for ($j=0; $j < count($NotCHlocoOnWay); $j++) { 
-                                // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
-                                // echo $ns[$i][1].'<br/>';
-                                $NotCHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `locomotives` WHERE `number` = ". explode(' ',$ns[$i][3])[$j]))[0];
-                                
-                            }
-                        }
-
-                        if ($CHlocoOnWay[0]==0) {
-                            $CHloco[$i] = 0;
-                        }else {
-                            // print_r($trainsOnWay);
-                            for ($j=0; $j < count($CHlocoOnWay); $j++) { 
-                                // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
-                                // echo $ns[$i][1].'<br/>';
-                                $CHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `locomotives` WHERE `number` = ". explode(' ',$ns[$i][2])[$j]))[0];
-                                
-                            }
-                        }
-                }
-                $ans = ['trains' => $trains, 'CH' => $CHloco, 'NotCH' => $NotCHloco];
-                echo json_encode($ans);
-                }
-                break;
-            case 'POST':
-                $fix = json_decode(file_get_contents('php://input'));
-                
-
-                $fixTrain = $fix[0];
-                $fixLocoCH = $fix[1][0];
-                $fixLocoNotCH = $fix[1][1];
-                
-                for ($i=0; $i < count($fixTrain); $i++) {
-                    if ($fixTrain[$i][1])$StrTrains = $fixTrain[$i][1][0][0];
-                    else $StrTrains = 0;
-
-                    if ($fixTrain[$i][1]) {
-                        for ($j=1; $j < count($fixTrain[$i][1]); $j++) {
-                            $StrTrains = $StrTrains.' '.$fixTrain[$i][1][$j][0];
-                        }
-                        // $trains = join(' ', $fixTrain[$i][1]);
-                        // $trains = join(' ', ['44', '24', '34', '54']);
-    
-                        echo $StrTrains.'   '.$fixTrain[$i][0];
-                        mysqli_query($connect, "UPDATE `".$station."` SET `trains` = '$StrTrains' WHERE ".$station.".`way` = ".$fixTrain[$i][0]);
-    
-                    }else {
-                        mysqli_query($connect, "UPDATE ".$station." SET `trains` = 0 WHERE ".$station.".`way` = ".$fixTrain[$i][0]);
-                    }
-                    
-                }
-                // echo json_encode($fixTrain);
-                // echo 'gogo';
-
-                for ($i=0; $i < count($fixTrain); $i++) { 
-                    for ($j=0; $j < count($fixTrain[$i][1]); $j++) { 
-                        mysqli_query($connect, "UPDATE `trains` SET `position` = '".$fixTrain[$i][1][$j][2]."' WHERE `trains`.`number` = ".$fixTrain[$i][1][$j][0]);
-                    }
-                    
-                }
-
-
-                for ($i=0; $i < count($fixLocoCH); $i++) {
-                    if ($fixLocoCH[$i][1])$StrTrains = $fixLocoCH[$i][1][0][0];
-                    else $StrTrains = 0;
-
-                    if ($fixLocoCH[$i][1]) {
-                        for ($j=1; $j < count($fixLocoCH[$i][1]); $j++) {
-                            $StrTrains = $StrTrains.' '.$fixLocoCH[$i][1][$j][0];
-                        }
-                        // $trains = join(' ', $fixLocoCH[$i][1]);
-                        // $trains = join(' ', ['44', '24', '34', '54']);
-    
-                        echo $StrTrains.'   '.$fixLocoCH[$i][0];
-                        mysqli_query($connect, "UPDATE ".$station." SET `CH` = '$StrTrains' WHERE ".$station.".`way` = ".$fixLocoCH[$i][0]);
-    
-                    }else {
-                        mysqli_query($connect, "UPDATE ".$station." SET `CH` = 0 WHERE ".$station.".`way` = ".$fixLocoCH[$i][0]);
-                    }
-                    
-                }
-
-                for ($i=0; $i < count($fixLocoNotCH); $i++) {
-                    if ($fixLocoNotCH[$i][1])$StrTrains = $fixLocoNotCH[$i][1][0][0];
-                    else $StrTrains = 0;
-
-                    if ($fixLocoNotCH[$i][1]) {
-                        for ($j=1; $j < count($fixLocoNotCH[$i][1]); $j++) {
-                            $StrTrains = $StrTrains.' '.$fixLocoNotCH[$i][1][$j][0];
-                        }
-                        // $trains = join(' ', $fixLocoNotCH[$i][1]);
-                        // $trains = join(' ', ['44', '24', '34', '54']);
-    
-                        echo $StrTrains.'   '.$fixLocoNotCH[$i][0];
-                        mysqli_query($connect, "UPDATE ".$station." SET `NotCH` = '$StrTrains' WHERE ".$station.".`way` = ".$fixLocoNotCH[$i][0]);
-    
-                    }else {
-                        mysqli_query($connect, "UPDATE ".$station." SET `NotCH` = 0 WHERE ".$station.".`way` = ".$fixLocoNotCH[$i][0]);
-                    }
-                    
-                }
-
-                
-
-                
-                
-                    
-                break;
-
-
-            default:
-                # code...
-                break;
-        }
-        break;
-    case 'operation':
-        switch ($method) {
-            case 'GET':
-                $operation = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `operation`'));
-                echo json_encode($operation);
-                break;
-            case 'POST':
-                $data = json_decode(file_get_contents('php://input'));
-                echo $data;
-                mysqli_query($connect, "INSERT INTO `operation` (`id`, `desc`, `type`, `num_Loco_CH`, `num_Loco_NotCH`, `vagon`, `from`, `to`, `later_min`, `start`, `finish`) VALUES (NULL, '$data[0]', '$data[1]', '$data[2]', '$data[3]', '$data[4]', '$data[5]', '$data[6]', '$data[7]', '$data[8]', '$data[9]')");
-                break;
-            case 'DELETE':
-                echo mysqli_query($connect, "DELETE FROM operation WHERE `operation`.`id` = ".file_get_contents('php://input'));
-                break;
-            default:
-                # code...
-                break;
-        }
-        
-        break;
-    case 'train':
-        switch ($method) {
-            case 'GET':
-                $number = $_GET['train'];
-                $ans = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `trains` WHERE number = '.$number.';'))[0];
-                echo json_encode([$ans[0], $ans[2]]);
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-        break;
-    
-    case 'authorization':
-        $data = json_decode(file_get_contents('php://input'));
-        $name = $data[0];
-        $password = $data[1];
-        $g = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `name`='$name';"));
-
-        if ($g[0][0]==$password) {
-            echo mysqli_fetch_all(mysqli_query($connect, "SELECT `id` FROM `amdins` WHERE `name`='$name';"))[0][0];
-        }else {
-            echo 0;
-        }
-        break;
-
-
-    
-          
-            
-    
-
-          
-    
-    
-  
-    
-}
+// -require_once __DIR__.'/configuration/connect.php';
+// -$method = $_SERVER['REQUEST_METHOD'];
+// -// if ($connect) {
+// -//         echo 'gg';
+// -//     }else {
+// -//         echo 'badg';
+// -//     }
+// -switch ($_GET['need']) {
+// -    case 'station':
+// -        $station = $_GET['station'];
+// -        switch ($method) {
+// -            case 'GET':
+// -                $id = $_GET['id'];
+// -                
+// -                $password = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `id`='$id';"))[0][0];
+// -                if ($password==$_GET['password']) {
+// -                    $ns = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `".$station."`"));
+// -                for ($i=0; $i < count($ns); $i++) {
+// -                    $trainsOnWay = explode(' ',$ns[$i][1]);
+// -                    $CHlocoOnWay = explode(' ',$ns[$i][2]);
+// -                    $NotCHlocoOnWay = explode(' ',$ns[$i][3]);
+// -
+// -                        if ($trainsOnWay[0]==0) {
+// -                            $trains[$i] = 0;
+// -                        }else {
+// -                            // print_r($trainsOnWay);
+// -                            for ($j=0; $j < count($trainsOnWay); $j++) { 
+// -                                // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
+// -                                // echo $ns[$i][1].'<br/>';
+// -                                $trains[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j]))[0];
+// -                                
+// -                            }
+// -                        }
+// -
+// -                        if ($NotCHlocoOnWay[0]==0) {
+// -                            $NotCHloco[$i] = 0;
+// -                        }else {
+// -                            // print_r($trainsOnWay);
+// -                            for ($j=0; $j < count($NotCHlocoOnWay); $j++) { 
+// -                                // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
+// -                                // echo $ns[$i][1].'<br/>';
+// -                                $NotCHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `locomotives` WHERE `number` = ". explode(' ',$ns[$i][3])[$j]))[0];
+// -                                
+// -                            }
+// -                        }
+// -
+// -                        if ($CHlocoOnWay[0]==0) {
+// -                            $CHloco[$i] = 0;
+// -                        }else {
+// -                            // print_r($trainsOnWay);
+// -                            for ($j=0; $j < count($CHlocoOnWay); $j++) { 
+// -                                // echo "SELECT * FROM `trains` WHERE `number` = ". explode(' ',$ns[$i][1])[$j].'<br/>';
+// -                                // echo $ns[$i][1].'<br/>';
+// -                                $CHloco[$i][$j] = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `locomotives` WHERE `number` = ". explode(' ',$ns[$i][2])[$j]))[0];
+// -                                
+// -                            }
+// -                        }
+// -                }
+// -                $ans = ['trains' => $trains, 'CH' => $CHloco, 'NotCH' => $NotCHloco];
+// -                echo json_encode($ans);
+// -                }
+// -                break;
+// -            case 'POST':
+// -                $fix = json_decode(file_get_contents('php://input'));
+// -                
+// -
+// -                $fixTrain = $fix[0];
+// -                $fixLocoCH = $fix[1][0];
+// -                $fixLocoNotCH = $fix[1][1];
+// -                
+// -                for ($i=0; $i < count($fixTrain); $i++) {
+// -                    if ($fixTrain[$i][1])$StrTrains = $fixTrain[$i][1][0][0];
+// -                    else $StrTrains = 0;
+// -
+// -                    if ($fixTrain[$i][1]) {
+// -                        for ($j=1; $j < count($fixTrain[$i][1]); $j++) {
+// -                            $StrTrains = $StrTrains.' '.$fixTrain[$i][1][$j][0];
+// -                        }
+// -                        // $trains = join(' ', $fixTrain[$i][1]);
+// -                        // $trains = join(' ', ['44', '24', '34', '54']);
+// -    
+// -                        echo $StrTrains.'   '.$fixTrain[$i][0];
+// -                        mysqli_query($connect, "UPDATE `".$station."` SET `trains` = '$StrTrains' WHERE ".$station.".`way` = ".$fixTrain[$i][0]);
+// -    
+// -                    }else {
+// -                        mysqli_query($connect, "UPDATE ".$station." SET `trains` = 0 WHERE ".$station.".`way` = ".$fixTrain[$i][0]);
+// -                    }
+// -                    
+// -                }
+// -                // echo json_encode($fixTrain);
+// -                // echo 'gogo';
+// -
+// -                for ($i=0; $i < count($fixTrain); $i++) { 
+// -                    for ($j=0; $j < count($fixTrain[$i][1]); $j++) { 
+// -                        mysqli_query($connect, "UPDATE `trains` SET `position` = '".$fixTrain[$i][1][$j][2]."' WHERE `trains`.`number` = ".$fixTrain[$i][1][$j][0]);
+// -                    }
+// -                    
+// -                }
+// -
+// -
+// -                for ($i=0; $i < count($fixLocoCH); $i++) {
+// -                    if ($fixLocoCH[$i][1])$StrTrains = $fixLocoCH[$i][1][0][0];
+// -                    else $StrTrains = 0;
+// -
+// -                    if ($fixLocoCH[$i][1]) {
+// -                        for ($j=1; $j < count($fixLocoCH[$i][1]); $j++) {
+// -                            $StrTrains = $StrTrains.' '.$fixLocoCH[$i][1][$j][0];
+// -                        }
+// -                        // $trains = join(' ', $fixLocoCH[$i][1]);
+// -                        // $trains = join(' ', ['44', '24', '34', '54']);
+// -    
+// -                        echo $StrTrains.'   '.$fixLocoCH[$i][0];
+// -                        mysqli_query($connect, "UPDATE ".$station." SET `CH` = '$StrTrains' WHERE ".$station.".`way` = ".$fixLocoCH[$i][0]);
+// -    
+// -                    }else {
+// -                        mysqli_query($connect, "UPDATE ".$station." SET `CH` = 0 WHERE ".$station.".`way` = ".$fixLocoCH[$i][0]);
+// -                    }
+// -                    
+// -                }
+// -
+// -                for ($i=0; $i < count($fixLocoNotCH); $i++) {
+// -                    if ($fixLocoNotCH[$i][1])$StrTrains = $fixLocoNotCH[$i][1][0][0];
+// -                    else $StrTrains = 0;
+// -
+// -                    if ($fixLocoNotCH[$i][1]) {
+// -                        for ($j=1; $j < count($fixLocoNotCH[$i][1]); $j++) {
+// -                            $StrTrains = $StrTrains.' '.$fixLocoNotCH[$i][1][$j][0];
+// -                        }
+// -                        // $trains = join(' ', $fixLocoNotCH[$i][1]);
+// -                        // $trains = join(' ', ['44', '24', '34', '54']);
+// -    
+// -                        echo $StrTrains.'   '.$fixLocoNotCH[$i][0];
+// -                        mysqli_query($connect, "UPDATE ".$station." SET `NotCH` = '$StrTrains' WHERE ".$station.".`way` = ".$fixLocoNotCH[$i][0]);
+// -    
+// -                    }else {
+// -                        mysqli_query($connect, "UPDATE ".$station." SET `NotCH` = 0 WHERE ".$station.".`way` = ".$fixLocoNotCH[$i][0]);
+// -                    }
+// -                    
+// -                }
+// -
+// -                
+// -
+// -                
+// -                
+// -                    
+// -                break;
+// -
+// -
+// -            default:
+// -                # code...
+// -                break;
+// -        }
+// -        break;
+// -    case 'operation':
+// -        switch ($method) {
+// -            case 'GET':
+// -                $operation = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `operation`'));
+// -                echo json_encode($operation);
+// -                break;
+// -            case 'POST':
+// -                $data = json_decode(file_get_contents('php://input'));
+// -                echo $data;
+// -                mysqli_query($connect, "INSERT INTO `operation` (`id`, `desc`, `type`, `num_Loco_CH`, `num_Loco_NotCH`, `vagon`, `from`, `to`, `later_min`, `start`, `finish`) VALUES (NULL, '$data[0]', '$data[1]', '$data[2]', '$data[3]', '$data[4]', '$data[5]', '$data[6]', '$data[7]', '$data[8]', '$data[9]')");
+// -                break;
+// -            case 'DELETE':
+// -                echo mysqli_query($connect, "DELETE FROM operation WHERE `operation`.`id` = ".file_get_contents('php://input'));
+// -                break;
+// -            default:
+// -                # code...
+// -                break;
+// -        }
+// -        
+// -        break;
+// -    case 'train':
+// -        switch ($method) {
+// -            case 'GET':
+// -                $number = $_GET['train'];
+// -                $ans = mysqli_fetch_all(mysqli_query($connect, 'SELECT * FROM `trains` WHERE number = '.$number.';'))[0];
+// -                echo json_encode([$ans[0], $ans[2]]);
+// -                break;
+// -            
+// -            default:
+// -                # code...
+// -                break;
+// -        }
+// -        break;
+// -    
+// -    case 'authorization':
+// -        $data = json_decode(file_get_contents('php://input'));
+// -        $name = $data[0];
+// -        $password = $data[1];
+// -        $g = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `name`='$name';"));
+// -
+// -        if ($g[0][0]==$password) {
+// -            echo mysqli_fetch_all(mysqli_query($connect, "SELECT `id` FROM `amdins` WHERE `name`='$name';"))[0][0];
+// -        }else {
+// -            echo 0;
+// -        }
+// -        break;
+// -
+// -
+// -    
+// -          
+// -            
+// -    
+// -
+// -          
+// -    
+// -    
+// -  
+// -    
+// -}
 // require_once __DIR__.'/configuration/connect.php';
 // $method = $_SERVER['REQUEST_METHOD'];
 // // if ($connect) {
