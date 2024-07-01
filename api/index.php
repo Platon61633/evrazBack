@@ -17,7 +17,7 @@ switch ($_GET['need']) {
         switch ($method) {
             case 'GET':
                 $id = $_GET['id'];
-                
+                echo $password;
                 $password = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `id`='$id';"))[0][0];
                 if ($password==$_GET['password']) {
                     $ns = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `".$station."`"));
