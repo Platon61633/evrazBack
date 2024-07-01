@@ -1,7 +1,7 @@
 <?php
 
 
-echo 'gg';
+// echo 'gg';
 
 // echo 'e';
 require_once __DIR__.'/configuration/connect.php';
