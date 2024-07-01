@@ -20,6 +20,7 @@ switch ($_GET['need']) {
                 $password = mysqli_fetch_all(mysqli_query($connect, "SELECT `password` FROM `amdins` WHERE `id`='$id';"));
                 // print_r($password[0][0]);
                 echo '<pre>'; print_r($password); echo '</pre>';
+                echo $password[0][0];
                 if ($password==$_GET['password']) {
                     $ns = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM `".$station."`"));
                 for ($i=0; $i < count($ns); $i++) {
