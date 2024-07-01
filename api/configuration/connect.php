@@ -6,6 +6,6 @@ header("Access-Control-Allow-Methods: *");
 // $connect = mysqli_connect('localhost', 'root', 'Platon61633', 'evraz');
 // $connect = mysqli_connect('sql208.infinityfree.com', 'if0_35067326', '64sOSFTMprm', 'if0_35067326_restoraunt');
 // $connect = mysqli_connect('https://free29.beget.com/phpMyAdmin/', 'u99561m1_resto', 'mavfa6-pyfcyd-Wygraf', 'u99561m1_resto');
-// $connect = mysqli_connect('db4free.net:3306', 'winnerevraz', 'evrazwinner777', 'evrazy');
+$connect = mysqli_connect('db4free.net:3306', 'winnerevraz', 'evrazwinner777', 'evrazy');
 // mysqli_set_charset($connect, 'utf8mb4');
 ?>
