@@ -12,14 +12,14 @@ $method = $_SERVER['REQUEST_METHOD'];
 //         echo 'badg';
 //     }
 switch ($_GET['need']) {
-    case 'register':
+    case 'signin':
         switch ($method) {
             case 'POST':
                 $data = json_decode(file_get_contents('php://input'), true);
 
                 // echo $data['name'];
 
-                $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `email` = "+$data['email']));
+                $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `email` = "+$data['login']));
 
                 echo $password;
 
