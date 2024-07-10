@@ -21,7 +21,7 @@ switch ($_GET['need']) {
 
                 $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `email` = '".$data."'"));
 
-                echo $password;
+                echo $password[0];
 
                 break;
             
