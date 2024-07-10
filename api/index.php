@@ -21,7 +21,7 @@ switch ($_GET['need']) {
                 break;
             
             default:
-                # code...
+                echo 'j';
                 break;
         }
         break;
