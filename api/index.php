@@ -13,7 +13,16 @@ $method = $_SERVER['REQUEST_METHOD'];
 //     }
 switch ($_GET['need']) {
     case 'register':
-        echo 'hh';
+        switch ($method) {
+            case 'POST':
+                $data = json_decode(file_get_contents('php://input'));
+                echo $data['name'];
+                break;
+            
+            default:
+                # code...
+                break;
+        }
         break;
 
 
