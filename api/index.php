@@ -19,7 +19,7 @@ switch ($_GET['need']) {
 
                 echo $data;
 
-                $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `email` = '".$data+"'"));
+                $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `email` = '".$data."'"));
 
                 echo $password;
 
