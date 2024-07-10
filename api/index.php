@@ -12,6 +12,16 @@ $method = $_SERVER['REQUEST_METHOD'];
 //         echo 'badg';
 //     }
 switch ($_GET['need']) {
+    case 'register':
+        echo 'hh';
+        break;
+
+
+
+
+
+
+    // ------------------------------------------------------------
     case 'station':
         $station = $_GET['station'];
         switch ($method) {
