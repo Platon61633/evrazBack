@@ -15,7 +15,7 @@ switch ($_GET['need']) {
     case 'signin':
         switch ($method) {
             case 'POST':
-                $data = file_get_contents('php://input');
+                $data = file_get_contents('php://input'); 
 
                 // echo $data['name'];
 
