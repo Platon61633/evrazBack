@@ -17,7 +17,7 @@ switch ($_GET['need']) {
             case 'POST':
                 $data = file_get_contents('php://input'); 
 
-                // echo $data['name'];
+                echo $data;
 
                 $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `email` = ".$data));
 
