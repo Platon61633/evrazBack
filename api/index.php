@@ -44,7 +44,7 @@ switch ($_GET['need']) {
             case 'POST':
                 $data = json_decode(file_get_contents('php://input'), true); 
                 echo $data['name'];
-                mysqli_query($connect1, "INSERT INTO `users` (`id`, `name`, `surname`, `password`, `university`, `faculty`, `email`) VALUES (NULL, '".$data['name']."', '".$data['surname']."', '".$data['password']."', '".$data['university']."', '".$data['faculty']."', '".$data['email']."')")
+                mysqli_query($connect1, "INSERT INTO `users` (`id`, `name`, `surname`, `password`, `university`, `faculty`, `email`) VALUES (NULL, '".$data['name']."', '".$data['surname']."', '".$data['password']."', '".$data['university']."', '".$data['faculty']."', '".$data['email']."')");
 
                 break;
             
