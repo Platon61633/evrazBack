@@ -58,7 +58,7 @@ switch ($_GET['need']) {
         switch ($method) {
             case 'GET':
                 $data = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `posts`"));
-                print_r($data);
+                // print_r($data);
                 echo json_encode($data);
                 break;
             
