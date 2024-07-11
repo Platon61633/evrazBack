@@ -20,13 +20,13 @@ switch ($_GET['need']) {
                 // print_r($data);
 
                 // echo $data[0];
-
-                $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `email` = '".$data[0]."'"))[0][3];
+                $user = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `email` = '".$data[0]."'"));
+                
                 // print_r($password);
-                if ($password==$data[1] and $password) {
-                    echo 1;
+                if ($user[0][3]==$data[1] and $user[0][3]) {
+                    echo json_encode([[$data], 1]);
                 }else{
-                    echo 0;
+                    echo json_encode([[0], 0]);
                 }
                 // echo $password[0][3];
 
