@@ -68,6 +68,18 @@ switch ($_GET['need']) {
         }
         
         break;
+    case 'like':
+        switch ($method) {
+            case 'POST':
+                $data = json_decode(file_get_contents('php://input'), true);
+                mysqli_query($connect1, "UPDATE `users` SET `liked` = '".$data['Liked']."' WHERE `users`.`id` = ".$data['id_user'].";");
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        break;
 
 
 
