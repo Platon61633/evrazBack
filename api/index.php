@@ -24,7 +24,7 @@ switch ($_GET['need']) {
                 
                 // print_r($password);
                 if ($user[0][3]==$data[1] and $user[0][3]) {
-                    echo json_encode([[$user], 1]);
+                    echo json_encode([$user, 1]);
                 }else{
                     echo json_encode([[0], 0]);
                 }
