@@ -83,10 +83,10 @@ switch ($_GET['need']) {
                 $data = ['Liked'=>['1','2'],
             'id_user'=>'2'
             ];
-                $Liked = '1,2';
-                // for ($i=0; $i < $data['Liked']; $i++) { 
-                //     $Liked = $Liked.$data['Liked'][$i].',';
-                // }
+                $Liked = '';
+                for ($i=0; $i < 2; $i++) { 
+                    $Liked = $Liked.$data['Liked'][$i].',';
+                }
                 mysqli_query($connect1, "UPDATE `users` SET `liked` = '".$Liked."' WHERE `users`.`id` = ".$data['id_user'].";");
                 break;
             
