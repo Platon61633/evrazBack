@@ -54,6 +54,21 @@ switch ($_GET['need']) {
         }
         break;
 
+    case 'posts':
+        switch ($method) {
+            case 'GET':
+                $data = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `posts`"));
+                print_r($data);
+                echo $data;
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        
+        break;
+
 
 
 
