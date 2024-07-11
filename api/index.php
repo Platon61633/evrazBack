@@ -39,6 +39,20 @@ switch ($_GET['need']) {
         break;
 
 
+    case 'register':
+        switch ($method) {
+            case 'POST':
+                $data = json_decode(file_get_contents('php://input'), true); 
+                echo $data['name'];
+
+
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
 
 
 
