@@ -99,7 +99,7 @@ switch ($_GET['need']) {
         switch ($method) {
             case 'GET':
                 $id = $_GET['need'];
-                $data = mysqli_fetch_all(mysqli_query($connect1, "SELECT `liked` FROM `users` WHERE users.id = ".id));
+                $data = mysqli_fetch_all(mysqli_query($connect1, "SELECT `liked` FROM `users` WHERE users.id = ".$id));
                 print_r($data);
                 break;
             
