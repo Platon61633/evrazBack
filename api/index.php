@@ -15,11 +15,11 @@ switch ($_GET['need']) {
     case 'signin':
         switch ($method) {
             case 'POST':
-                $data = file_get_contents('php://input')[0]; 
+                $data = file_get_contents('php://input'); 
 
-                echo $data;
+                print_r($data);
 
-                $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `email` = '".$data."'"));
+                $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `email` = '".$data[0]."'"));
 
                 echo $password[0][3];
 
