@@ -234,7 +234,7 @@ switch ($_GET['need']) {
                 echo mysqli_query($connect, "DELETE FROM operation WHERE `operation`.`id` = ".file_get_contents('php://input'));
                 break;
             default:
-                # code...
+                # code... 
                 break;
         }
         
