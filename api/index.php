@@ -95,6 +95,19 @@ switch ($_GET['need']) {
                 break;
         }
         break;
+    case 'was_liked':
+        switch ($method) {
+            case 'GET':
+                $id = $_GET['need'];
+                $data = mysqli_fetch_all(mysqli_query($connect1, "SELECT `liked` FROM `users` WHERE users.id = ".id));
+                print_r($data);
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        break;
 
 
 
