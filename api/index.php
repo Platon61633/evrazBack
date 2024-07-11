@@ -23,7 +23,7 @@ switch ($_GET['need']) {
 
                 $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `email` = '".$data[0]."'"))[0][3];
                 // print_r($password);
-                echo (boolean) $data;
+                echo (boolean) $password;
                 if ($password==$data[1] and $password) {
                     echo 1;
                 }else{
