@@ -76,7 +76,7 @@ switch ($_GET['need']) {
                 for ($i=0; $i < $data['Liked']; $i++) { 
                     $Liked = $Liked.$data[$i];
                 }
-                mysqli_query($connect1, "UPDATE `users` SET `liked` = '".$dLiked."' WHERE `users`.`id` = ".$data['id_user'].";");
+                mysqli_query($connect1, "UPDATE `users` SET `liked` = '".$Liked."' WHERE `users`.`id` = ".$data['id_user'].";");
                 break;
             
             default:
