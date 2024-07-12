@@ -137,7 +137,7 @@ switch ($_GET['need']) {
         switch ($method) {
             case 'POST':
                 $data = json_decode(file_get_contents('php://input'), true);
-                print_r($data)
+                print_r($data);
                 break;
             
             default:
