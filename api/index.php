@@ -114,7 +114,9 @@ switch ($_GET['need']) {
         switch ($method) {
             case 'POST':
                 $data = json_decode(file_get_contents('php://input'), true);
-                print_r($data);
+
+                $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT `password` FROM `users` WHERE `email` = '".$data['email']."'"));
+                print_r($password);
                 break;
             
             default:
