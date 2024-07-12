@@ -115,8 +115,16 @@ switch ($_GET['need']) {
             case 'POST':
                 $data = json_decode(file_get_contents('php://input'), true);
 
-                $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT `password` FROM `users` WHERE `email` = '".$data['email']."'"));
-                print_r($password);
+                $password = mysqli_fetch_all(mysqli_query($connect1, "SELECT `password` FROM `users` WHERE `email` = '".$data['email']."'"))[0][0];
+                if ($password==$data['password']) {
+                    mysqli_query($connect1, "UPDATE `users` SET `faculty` = '".$data['InputFaculty']."' WHERE `users`.`id` = ".$data['id']);
+                    mysqli_query($connect1, "UPDATE `users` SET `university` = '".$data['InputUniversity']."' WHERE `users`.`id` = ".$data['id']);
+                    mysqli_query($connect1, "UPDATE `users` SET `name` = '".$data['InputName']."' WHERE `users`.`id` = ".$data['id']);
+                    mysqli_query($connect1, "UPDATE `users` SET `surname` = '".$data['InputSurname']."' WHERE `users`.`id` = ".$data['id']);
+                    echo 1;
+                } else{
+                    echo 0;
+                }
                 break;
             
             default:
