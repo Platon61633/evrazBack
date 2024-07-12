@@ -137,7 +137,13 @@ switch ($_GET['need']) {
         switch ($method) {
             case 'POST':
                 $data = json_decode(file_get_contents('php://input'), true);
-                print_r($data);
+                $user = mysqli_fetch_all(mysqli_query($connect1, "SELECT * FROM `users` WHERE `id` = '".$data['id']."'"))[0];
+                if ($user[3]==$data['password']) {
+                    mysqli_query($connect1, "INSERT INTO `posts` (`id`, `name`, `surname`, `comment`, `subjects`, `phone`, `user_id`) VALUES (NULL, '".$user[1]]."', '".$user[2]."', '".$data['Comment']."', '".$data['Subjects']."', '".$data['Phone']."', '".$data['user_id']."')");
+                    echo 1;
+                }else{
+                    echo 0;
+                }
                 break;
             
             default:
